@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="content">
+  <h3 class="mb-4 text-danger">
+    <i class="bi bi-exclamation-triangle-fill"></i> ユーザー削除確認
+  </h3>
+
+  <p>以下のユーザーを本当に削除してもよろしいですか？</p>
+
+  <ul class="list-group mb-4">
+    <li class="list-group-item"><strong>ID:</strong> <span th:text="${user.id}"></span></li>
+    <li class="list-group-item"><strong>名前:</strong> <span th:text="${user.name}"></span></li>
+    <li class="list-group-item"><strong>権限:</strong> <span th:text="${user.role}"></span></li>
+  </ul>
+
+  <form th:action="@{'/users/delete/' + ${user.id}}" method="post">
+    <button type="submit" class="btn btn-danger">
+      <i class="bi bi-trash"></i> 削除
+    </button>
+    <a th:href="@{/users}" class="btn btn-secondary">キャンセル</a>
+  </form>
+</div>
+</body>
+</html>

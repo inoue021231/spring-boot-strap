@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="content">
+  <h3 class="mb-3"><i class="bi bi-house-door"></i> ホーム</h3>
+  <p>ようこそ、ダッシュボードへ。</p>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card border-primary mb-3">
+        <div class="card-header">お知らせ</div>
+        <div class="card-body">
+          <p class="card-text">お知らせの内容をここに記載できます。</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card border-success mb-3">
+        <div class="card-header">ステータス</div>
+        <div class="card-body">
+          <p class="card-text">アプリの稼働状況などを表示します。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

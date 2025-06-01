@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="content">
+  <h2 class="mb-4">設定</h2>
+  <form>
+    <div class="mb-3">
+      <label for="lang" class="form-label">言語選択</label>
+      <select id="lang" class="form-select">
+        <option selected>日本語</option>
+        <option>English</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">保存</button>
+  </form>
+</div>
+</body>
+</html>
