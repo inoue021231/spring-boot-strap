@@ -10,23 +10,41 @@
   <form th:action="@{/users/save}" method="post">
     <input type="hidden" name="id" th:value="${user.id}" />
 
-    <div class="mb-3">
-      <label class="form-label">名前</label>
-      <input type="text" name="name" class="form-control" th:value="${user.name}" required />
+    <!-- 名前（text） -->
+    <div class="form-floating mb-3">
+      <input type="text" class="form-control" id="nameInput" name="name" placeholder="名前" th:value="${user.name}" required />
+      <label for="nameInput">名前</label>
     </div>
 
-    <div class="mb-3">
-      <label class="form-label">権限</label>
-      <select name="role" class="form-select">
+    <!-- 権限（select） -->
+    <div class="form-floating mb-3">
+      <select class="form-select" id="roleSelect" name="role" required>
+        <option value="" th:selected="${user.role == ''}">選択してください</option>
         <option value="一般" th:selected="${user.role == '一般'}">一般</option>
         <option value="管理者" th:selected="${user.role == '管理者'}">管理者</option>
       </select>
+      <label for="roleSelect">権限</label>
     </div>
 
-    <button type="submit" class="btn btn-primary">
-      <i class="bi bi-save"></i> 保存
-    </button>
-    <a th:href="@{/users}" class="btn btn-secondary">キャンセル</a>
+    <!-- 生年月日（date） -->
+    <div class="form-floating mb-3">
+      <input type="date" class="form-control" id="birthInput" name="birthdate" placeholder="生年月日" th:value="${user.birthdate}" />
+      <label for="birthInput">生年月日</label>
+    </div>
+
+    <!-- ログイン回数（number） -->
+    <div class="form-floating mb-3">
+      <input type="number" class="form-control" id="loginCountInput" name="loginCount" placeholder="ログイン回数" th:value="${user.loginCount}" min="0" />
+      <label for="loginCountInput">ログイン回数</label>
+    </div>
+
+    <!-- ボタン -->
+    <div class="d-flex gap-2">
+      <button type="submit" class="btn btn-primary">
+        <i class="bi bi-save"></i> 保存
+      </button>
+      <a th:href="@{/users}" class="btn btn-secondary">キャンセル</a>
+    </div>
   </form>
 </div>
 </body>

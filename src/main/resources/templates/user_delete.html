@@ -2,23 +2,34 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
 <div th:fragment="content">
-  <h3 class="mb-4 text-danger">
-    <i class="bi bi-exclamation-triangle-fill"></i> ユーザー削除確認
-  </h3>
+  <div class="alert alert-danger d-flex align-items-center mb-4" role="alert">
+    <i class="bi bi-exclamation-triangle-fill me-2 fs-4"></i>
+    <div>
+      <strong>ユーザー削除確認</strong><br/>
+      本当に削除してよろしいですか？
+    </div>
+  </div>
 
-  <p>以下のユーザーを本当に削除してもよろしいですか？</p>
-
-  <ul class="list-group mb-4">
-    <li class="list-group-item"><strong>ID:</strong> <span th:text="${user.id}"></span></li>
-    <li class="list-group-item"><strong>名前:</strong> <span th:text="${user.name}"></span></li>
-    <li class="list-group-item"><strong>権限:</strong> <span th:text="${user.role}"></span></li>
-  </ul>
+  <div class="card mb-4">
+    <div class="card-header bg-light">
+      削除対象のユーザー情報
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item"><strong>ID:</strong> <span th:text="${user.id}"></span></li>
+      <li class="list-group-item"><strong>名前:</strong> <span th:text="${user.name}"></span></li>
+      <li class="list-group-item"><strong>権限:</strong> <span th:text="${user.role}"></span></li>
+    </ul>
+  </div>
 
   <form th:action="@{'/users/delete/' + ${user.id}}" method="post">
-    <button type="submit" class="btn btn-danger">
-      <i class="bi bi-trash"></i> 削除
-    </button>
-    <a th:href="@{/users}" class="btn btn-secondary">キャンセル</a>
+    <div class="d-flex gap-3">
+      <button type="submit" class="btn btn-danger">
+        <i class="bi bi-trash-fill me-1"></i> 削除する
+      </button>
+      <a th:href="@{/users}" class="btn btn-secondary">
+        <i class="bi bi-x-circle me-1"></i> キャンセル
+      </a>
+    </div>
   </form>
 </div>
 </body>
