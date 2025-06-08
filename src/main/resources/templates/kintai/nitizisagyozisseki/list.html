@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+	<div th:fragment="content">
+		<div class="d-flex justify-content-between align-items-center mb-3">
+			<h3><i class="bi bi-people"></i> 日次作業実績一覧</h3>
+			<a class="btn btn-success" th:href="@{/kintai/nitizisagyozisseki/create}">
+				<i class="bi bi-person-plus"></i> 新規作成
+			</a>
+		</div>
+
+		<!-- 検索フォーム -->
+		<form class="row g-3 mb-3" method="get" th:action="@{/kintai/nitizisagyozisseki}">
+			<div class="col-auto">
+				<input type="text" class="form-control" name="searchSyainbango" placeholder="社員番号検索"
+					th:value="${searchSyainbango}">
+			</div>
+			<div class="col-auto">
+				<button type="submit" class="btn btn-primary">
+					<i class="bi bi-search"></i> 検索
+				</button>
+			</div>
+		</form>
+
+		<!-- 件数表示 -->
+		<div class="mb-2">
+			<span th:text="'全 ' + ${totalItems} + ' 件中、ページ ' + ${currentPage} + ' / ' + ${totalPages} + ' ページ'"></span>
+		</div>
+
+		<!-- 一覧テーブル -->
+		<table class="table table-hover align-middle">
+			<thead class="table-light">
+				<tr>
+					<th>
+						<a
+							th:href="@{'/kintai/nitizisagyozisseki?(page=1,sortField='syainbango',sortDir=' + ${reverseSortDir} + ',searchSyainbango=' + ${searchSyainbango})'}">
+							社員番号 <i class="bi"
+								th:classappend="${sortField == 'syainbango'} ? (${sortDir == 'asc'} ? 'bi-caret-up-fill' : 'bi-caret-down-fill')"></i>
+						</a>
+					</th>
+					<th>
+						<a
+							th:href="@{'/kintai/nitizisagyozisseki?(page=1,sortField='sagyobi',sortDir=' + ${reverseSortDir} + ',searchSyainbango=' + ${searchSyainbango})'}">
+							作業日 <i class="bi"
+								th:classappend="${sortField == 'sagyobi'} ? (${sortDir == 'asc'} ? 'bi-caret-up-fill' : 'bi-caret-down-fill')"></i>
+						</a>
+					</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="entry : ${nitizisagyozisseki}">
+					<td th:text="${entry.syainbango}"></td>
+					<td th:text="${entry.displaySagyobi}"></td>
+					<td>
+						<a th:href="@{'/kintai/nitizisagyozisseki/edit/' + ${entry.sagyobi}}"
+							class="btn btn-outline-primary btn-sm me-2">
+							<i class="bi bi-pencil"></i> 編集
+						</a>
+						<a th:href="@{'/kintai/nitizisagyozisseki/delete/' + ${entry.sagyobi}}"
+							class="btn btn-outline-danger btn-sm">
+							<i class="bi bi-trash"></i> 削除
+						</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<!-- ページネーション -->
+		<nav>
+			<ul class="pagination">
+				<li class="page-item" th:classappend="${currentPage == 1} ? 'disabled'">
+					<a class="page-link"
+						th:href="@{'/kintai/nitizisagyozisseki?(page=' + (${currentPage} - 1) + ',sortField=' + ${sortField} + ',sortDir=' + ${sortDir} + ',searchSyainbango=' + ${searchSyainbango})'}">前へ</a>
+				</li>
+				<li class="page-item" th:each="i : ${#numbers.sequence(1, totalPages)}"
+					th:classappend="${i} == ${currentPage} ? 'active'">
+					<a class="page-link"
+						th:href="@{'/kintai/nitizisagyozisseki?(page=' + ${i} + ',sortField=' + ${sortField} + ',sortDir=' + ${sortDir} + ',searchSyainbango=' + ${searchSyainbango})'}"
+						th:text="${i}"></a>
+				</li>
+				<li class="page-item" th:classappend="${currentPage == totalPages} ? 'disabled'">
+					<a class="page-link"
+						th:href="@{'/kintai/nitizisagyozisseki?(page=' + (${currentPage} + 1) + ',sortField=' + ${sortField} + ',sortDir=' + ${sortDir} + ',searchSyainbango=' + ${searchSyainbango})'}">次へ</a>
+				</li>
+			</ul>
+		</nav>
+	</div>
+</body>
+
+</html>
